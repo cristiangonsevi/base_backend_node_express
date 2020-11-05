@@ -1,6 +1,6 @@
 # A express js backend and MongoDB
 
-# this is a complete base for create a backend with express and mongodb
+# This is a complete base for create a backend with express and mongodb
 
 # Steps
 
