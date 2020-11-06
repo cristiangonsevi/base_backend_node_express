@@ -20,7 +20,15 @@ router.post(
 	],
 	createHHospital
 );
-router.put('/:id', updatedHHospital);
-router.delete('/:id', deleteHHospitals);
+router.put(
+	'/:id',
+	[
+		jwtValidation,
+		check('name', 'This field is required').not().isEmpty(),
+		check('hospital', 'This field is required').not().isEmpty(),
+	],
+	updatedHHospital
+);
+router.delete('/:id', jwtValidation, deleteHHospitals);
 
 module.exports = router;

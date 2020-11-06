@@ -48,4 +48,13 @@ const googleSingIn = async (req, res) => {
 		res.json({ ok: false, msg: 'Oops, we have some errors, please see logs' });
 	}
 };
-module.exports = { login, googleSingIn };
+
+const renewToken = async (req, res) => {
+	const uid = req.uid;
+	const token = await createJWT(uid);
+	res.json({
+		ok: true,
+		token,
+	});
+};
+module.exports = { login, googleSingIn, renewToken };
