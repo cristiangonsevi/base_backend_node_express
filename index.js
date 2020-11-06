@@ -8,6 +8,8 @@ app.use(express.json());
 const { dbConnection } = require('./database/config');
 //* conexion a la base de datos
 dbConnection();
+// Public directory
+app.use(express.static('public'));
 //* ruta del api v1
 app.use('/api/v1', require('./routes/index'));
 
