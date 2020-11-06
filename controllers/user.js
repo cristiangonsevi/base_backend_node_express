@@ -2,8 +2,13 @@ const bcrypt = require('bcryptjs');
 const { createJWT } = require('../helpers/jwt');
 const User = require('../models/user');
 const getUser = async (req, res) => {
-	const users = await User.find({}, 'name email rol google');
-	res.json({ ok: true, users, uid: req.uid });
+	const since = Number(req.query.since) || 0;
+	console.log(since);
+	const [users, rowCount] = await Promise.all([
+		User.find({}, 'name email img rol google').skip(since).limit(5),
+		User.countDocuments(),
+	]);
+	res.json({ ok: true, users, uid: req.uid, rowCount });
 };
 const createUser = async (req, res) => {
 	const { name, email, password } = req.body;

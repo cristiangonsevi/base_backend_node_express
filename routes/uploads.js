@@ -1,0 +1,10 @@
+const { Router } = require('express');
+const router = Router();
+const { fileUpload, getImages } = require('../controllers/upload');
+const expressFileUpload = require('express-fileupload');
+const { jwtValidation } = require('../middleware/jwt-validation');
+const { route } = require('./users');
+router.use(expressFileUpload());
+router.put('/:type/:id', jwtValidation, fileUpload);
+router.get('/:type/:photo', getImages);
+module.exports = router;
